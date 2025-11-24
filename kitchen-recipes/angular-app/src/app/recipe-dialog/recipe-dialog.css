@@ -1,0 +1,185 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #2d3436;
+    font-weight: 600;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.col {
+    flex: 1;
+}
+
+.col-small {
+    width: 120px;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #636e72;
+    font-size: 0.9rem;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #ff6b6b;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.image-preview {
+    margin-top: 0.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 150px;
+    background: #f1f2f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dynamic-section {
+    margin-bottom: 1.5rem;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.dynamic-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    align-items: flex-start;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #ff7675;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    line-height: 1;
+}
+
+.remove-btn:hover {
+    color: #d63031;
+}
+
+.add-btn-small {
+    background: none;
+    border: 1px dashed #b2bec3;
+    color: #636e72;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.add-btn-small:hover {
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.05);
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.cancel-btn {
+    background-color: #f1f2f6;
+    color: #2d3436;
+}
+
+.cancel-btn:hover {
+    background-color: #dfe6e9;
+}
+
+.save-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.save-btn:hover:not(:disabled) {
+    background-color: #fa5252;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.save-btn:disabled {
+    background-color: #fab1a0;
+    cursor: not-allowed;
+    box-shadow: none;
+}

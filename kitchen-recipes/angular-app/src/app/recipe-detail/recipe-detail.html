@@ -1,0 +1,43 @@
+<div class="detail-container" *ngIf="recipe">
+    <div class="header-actions">
+        <button class="back-btn" (click)="goBack()">← Înapoi</button>
+
+        <div class="app-menu-container">
+            <button class="menu-btn" (click)="toggleMenu()">Opțiuni</button>
+            <div class="app-menu" *ngIf="showMenu">
+                <button (click)="toggleFavorite()">
+                    {{ recipe.isFavorite ? '💔 Elimină de la Favorite' : '❤️ Adaugă la Favorite' }}
+                </button>
+                <button (click)="printRecipe()">🖨 Imprimă</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="recipe-header">
+        <img [src]="recipe.imageUrl" [alt]="recipe.title" class="hero-image">
+        <div class="header-content">
+            <h1>{{ recipe.title }}</h1>
+            <p class="description">{{ recipe.description }}</p>
+            <div class="meta-info">
+                <span>⏱ Timp de preparare: {{ recipe.cookingTime }} minute</span>
+                <span *ngIf="recipe.isFavorite" class="favorite-badge">❤️ Favorit</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="recipe-body">
+        <div class="section ingredients">
+            <h2>Ingrediente</h2>
+            <ul>
+                <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+            </ul>
+        </div>
+
+        <div class="section steps">
+            <h2>Mod de preparare</h2>
+            <ol>
+                <li *ngFor="let step of recipe.steps">{{ step }}</li>
+            </ol>
+        </div>
+    </div>
+</div>

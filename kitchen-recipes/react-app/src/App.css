@@ -1,0 +1,19 @@
+.app-container {
+  padding: 2rem;
+  font-family: sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.recipe-grid {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}

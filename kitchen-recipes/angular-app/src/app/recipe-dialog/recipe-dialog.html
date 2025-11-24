@@ -1,0 +1,61 @@
+<div class="modal-overlay">
+    <div class="modal-content">
+        <h2>{{ isEditMode ? 'Editează Rețeta' : 'Adaugă Rețetă Nouă' }}</h2>
+
+        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="title">Titlu</label>
+                    <input type="text" id="title" formControlName="title" placeholder="Ex: Paste Carbonara">
+                </div>
+                <div class="form-group col-small">
+                    <label for="cookingTime">Timp (min)</label>
+                    <input type="number" id="cookingTime" formControlName="cookingTime">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descriere scurtă</label>
+                <textarea id="description" formControlName="description" rows="2"
+                    placeholder="O scurtă descriere a rețetei..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="imageUrl">URL Imagine</label>
+                <input type="text" id="imageUrl" formControlName="imageUrl" placeholder="https://...">
+                <div class="image-preview" *ngIf="recipeForm.get('imageUrl')?.value">
+                    <img [src]="recipeForm.get('imageUrl')?.value" alt="Preview" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <div class="dynamic-section">
+                <label>Ingrediente</label>
+                <div formArrayName="ingredients">
+                    <div *ngFor="let ing of ingredients.controls; let i=index" class="dynamic-row">
+                        <input [formControlName]="i" placeholder="Ingredient {{i+1}}">
+                        <button type="button" class="remove-btn" (click)="removeIngredient(i)"
+                            *ngIf="ingredients.length > 1">×</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn-small" (click)="addIngredient()">+ Adaugă Ingredient</button>
+            </div>
+
+            <div class="dynamic-section">
+                <label>Pași de preparare</label>
+                <div formArrayName="steps">
+                    <div *ngFor="let step of steps.controls; let i=index" class="dynamic-row">
+                        <textarea [formControlName]="i" rows="2" placeholder="Pasul {{i+1}}"></textarea>
+                        <button type="button" class="remove-btn" (click)="removeStep(i)"
+                            *ngIf="steps.length > 1">×</button>
+                    </div>
+                </div>
+                <button type="button" class="add-btn-small" (click)="addStep()">+ Adaugă Pas</button>
+            </div>
+
+            <div class="actions">
+                <button type="button" class="cancel-btn" (click)="onCancel()">Anulează</button>
+                <button type="submit" class="save-btn" [disabled]="recipeForm.invalid">Salvează</button>
+            </div>
+        </form>
+    </div>
+</div>

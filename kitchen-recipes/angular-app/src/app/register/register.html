@@ -1,0 +1,54 @@
+<div class="auth-container">
+    <div class="auth-image">
+        <div class="overlay">
+            <h1>Începe călătoria ta culinară</h1>
+            <p>Alătură-te comunității noastre și descoperă mii de rețete delicioase.</p>
+        </div>
+    </div>
+
+    <div class="auth-form-container">
+        <div class="auth-card">
+            <h2>Creează Cont</h2>
+            <p class="subtitle">Completează detaliile pentru a te înregistra</p>
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name">Nume Complet</label>
+                    <input type="text" id="name" formControlName="name" placeholder="Ion Popescu">
+                    <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+                        class="error-text">
+                        Numele este obligatoriu
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" formControlName="email" placeholder="nume@email.com">
+                    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                        class="error-text">
+                        Email invalid
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Parolă</label>
+                    <input type="password" id="password" formControlName="password" placeholder="Minim 6 caractere">
+                    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                        class="error-text">
+                        Parola trebuie să aibă minim 6 caractere
+                    </div>
+                </div>
+
+                <div *ngIf="errorMessage" class="error-message">
+                    {{ errorMessage }}
+                </div>
+
+                <button type="submit" [disabled]="registerForm.invalid">Înregistrează-te</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Ai deja un cont? <a routerLink="/login">Autentifică-te</a></p>
+            </div>
+        </div>
+    </div>
+</div>

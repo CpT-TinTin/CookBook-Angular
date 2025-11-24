@@ -1,0 +1,33 @@
+<div class="container" (click)="onDocumentClick()">
+    <header>
+        <h1>Rețete de Bucătărie</h1>
+        <button class="add-btn" (click)="addRecipe()">+ Adaugă Rețetă</button>
+    </header>
+
+    <div class="recipe-grid">
+        <div *ngFor="let recipe of recipes$ | async" class="recipe-card" (click)="viewDetails(recipe.id)">
+            <img [src]="recipe.imageUrl" [alt]="recipe.title" class="recipe-image">
+            <div class="recipe-content">
+                <h3>{{ recipe.title }}</h3>
+                <p>{{ recipe.description }}</p>
+                <div class="meta">
+                    <span>⏱ {{ recipe.cookingTime }} min</span>
+                    <span *ngIf="recipe.isFavorite">❤️</span>
+                </div>
+            </div>
+
+            <!-- Context Menu Trigger -->
+            <button class="menu-trigger" (click)="toggleMenu($event, recipe.id)">⋮</button>
+
+            <!-- Context Menu -->
+            <div class="context-menu" *ngIf="activeMenuId === recipe.id" (click)="$event.stopPropagation()">
+                <button (click)="editRecipe($event, recipe)">Editează</button>
+                <button (click)="deleteRecipe($event, recipe.id)" class="delete">Șterge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dialog Modal -->
+    <app-recipe-dialog *ngIf="showDialog" [recipe]="selectedRecipe" (close)="onDialogClose()">
+    </app-recipe-dialog>
+</div>

@@ -1,0 +1,40 @@
+<div class="auth-container">
+  <div class="auth-image">
+    <div class="overlay">
+      <h1>Bine ai revenit!</h1>
+      <p>Continuă să gătești și să împărtășești rețetele tale preferate.</p>
+    </div>
+  </div>
+
+  <div class="auth-form-container">
+    <div class="auth-card">
+      <h2>Autentificare</h2>
+      <p class="subtitle">Introdu datele pentru a intra în cont</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="nume@email.com">
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-text">
+            Email invalid
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Parolă</label>
+          <input type="password" id="password" formControlName="password" placeholder="Parola ta">
+        </div>
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+
+        <button type="submit" [disabled]="loginForm.invalid">Intră în cont</button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Nu ai cont? <a routerLink="/register">Creează unul acum</a></p>
+      </div>
+    </div>
+  </div>
+</div>

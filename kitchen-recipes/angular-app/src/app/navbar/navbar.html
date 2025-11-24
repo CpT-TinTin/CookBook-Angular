@@ -1,0 +1,12 @@
+<nav class="navbar" *ngIf="authService.isLoggedIn$ | async">
+    <div class="container">
+        <a routerLink="/recipes" class="logo">
+            🍳 KitchenRecipes
+        </a>
+
+        <div class="nav-links">
+            <a routerLink="/recipes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Rețete</a>
+            <button (click)="logout()" class="logout-btn">Deconectare</button>
+        </div>
+    </div>
+</nav>
