@@ -15,7 +15,8 @@ export class RecipeService {
       steps: ['Fierbeți pastele.', 'Prăjiți pancetta.', 'Amestecați ouăle cu parmesan.', 'Combinați totul.'],
       cookingTime: 20,
       imageUrl: 'https://placehold.co/600x400?text=Carbonara',
-      isFavorite: false
+      isFavorite: false,
+      category: 'Paste'
     },
     {
       id: '2',
@@ -25,7 +26,19 @@ export class RecipeService {
       steps: ['Gătiți puiul.', 'Tăiați salata.', 'Adăugați crutoanele și dressingul.'],
       cookingTime: 15,
       imageUrl: 'https://placehold.co/600x400?text=Caesar',
-      isFavorite: true
+      isFavorite: true,
+      category: 'Salate'
+    },
+    {
+      id: '3',
+      title: 'Tiramisu',
+      description: 'Desert elegant cu pișcoturi, cafea și mascarpone.',
+      ingredients: ['Mascarpone', 'Ouă', 'Zahăr', 'Cafea', 'Pișcoturi', 'Cacao'],
+      steps: ['Bateți crema.', 'Înmuiați pișcoturile.', 'Asamblați straturile.'],
+      cookingTime: 45,
+      imageUrl: 'https://placehold.co/600x400?text=Tiramisu',
+      isFavorite: true,
+      category: 'Desert'
     }
   ];
 

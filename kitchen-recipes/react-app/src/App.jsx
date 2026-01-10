@@ -1,39 +1,25 @@
 import React from 'react';
-import RecipeCard from './RecipeCard';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './Navbar';
+import RecipeList from './RecipeList';
+import RecipeDetail from './RecipeDetail';
+import './index.css';
 
 function App() {
-  const recipes = [
-    {
-      id: 1,
-      title: 'Paste Carbonara',
-      imageUrl: 'https://placehold.co/600x400?text=Carbonara'
-    },
-    {
-      id: 2,
-      title: 'Salată Caesar',
-      imageUrl: 'https://placehold.co/600x400?text=Caesar'
-    },
-    {
-      id: 3,
-      title: 'Tiramisu',
-      imageUrl: 'https://placehold.co/600x400?text=Tiramisu'
-    }
-  ];
-
   return (
-    <div className="app-container">
-      <h1>Rețete Favorite (React Minimal)</h1>
-      <div className="recipe-grid">
-        {recipes.map(recipe => (
-          <RecipeCard
-            key={recipe.id}
-            title={recipe.title}
-            imageUrl={recipe.imageUrl}
-          />
-        ))}
+    <Router>
+      <div className="app-container">
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<RecipeList />} />
+            <Route path="/recipe/:id" element={<RecipeDetail />} />
+            {/* Fallback route */}
+            <Route path="*" element={<RecipeList />} />
+          </Routes>
+        </main>
       </div>
-    </div>
+    </Router>
   );
 }
 

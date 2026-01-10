@@ -1,8 +1,23 @@
 <div class="container" (click)="onDocumentClick()">
     <header>
-        <h1>Rețete de Bucătărie</h1>
+        <div class="header-content">
+            <h1>Rețete de Bucătărie</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Caută rețete..." (input)="searchTerm$.next($any($event.target).value)"
+                    class="search-input">
+            </div>
+        </div>
         <button class="add-btn" (click)="addRecipe()">+ Adaugă Rețetă</button>
     </header>
+
+    <div class="categories-wrapper">
+        <div class="categories">
+            <button *ngFor="let cat of categories" class="category-chip" [class.active]="selectedCategory === cat"
+                (click)="selectCategory(cat)">
+                {{ cat }}
+            </button>
+        </div>
+    </div>
 
     <div class="recipe-grid">
         <div *ngFor="let recipe of recipes$ | async" class="recipe-card" (click)="viewDetails(recipe.id)">

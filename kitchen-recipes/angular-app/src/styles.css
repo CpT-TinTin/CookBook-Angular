@@ -14,6 +14,18 @@
     --font-family: 'Inter', sans-serif;
 }
 
+body.dark-theme {
+    --primary-color: #ff8787;
+    --primary-hover: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --text-color: #f1f2f6;
+    --text-light: #b2bec3;
+    --bg-color: #2d3436;
+    --card-bg: #353b48;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
 body {
     font-family: var(--font-family);
     background-color: var(--bg-color);

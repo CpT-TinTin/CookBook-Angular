@@ -186,3 +186,68 @@ h1 {
 .context-menu button.delete:hover {
     background-color: #fff5f5;
 }
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+}
+
+.search-bar {
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid #e1e4e8;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    background: #f8f9fa;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.search-input:focus {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: #4ecdc4;
+}
+
+.categories-wrapper {
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.categories {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.category-chip {
+    background: white;
+    border: 1px solid #e1e4e8;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #636e72;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.category-chip:hover {
+    background: #f8f9fa;
+    border-color: #d1d8e0;
+}
+
+.category-chip.active {
+    background: #4ecdc4;
+    color: white;
+    border-color: #4ecdc4;
+    box-shadow: 0 4px 10px rgba(78, 205, 196, 0.3);
+}

@@ -11,10 +11,21 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar.css'
 })
 export class NavbarComponent {
+  isDarkMode = false;
+
   constructor(
     public authService: AuthService,
     private router: Router
   ) { }
+
+  toggleTheme(): void {
+    this.isDarkMode = !this.isDarkMode;
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
 
   logout(): void {
     this.authService.logout();

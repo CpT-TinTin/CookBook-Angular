@@ -7,4 +7,5 @@ export interface Recipe {
   cookingTime: number; // in minutes
   imageUrl: string;
   isFavorite?: boolean;
+  category?: string;
 }

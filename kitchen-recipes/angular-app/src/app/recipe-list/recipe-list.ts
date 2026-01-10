@@ -3,18 +3,26 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../models';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [CommonModule, RecipeDialogComponent],
+  imports: [CommonModule, RecipeDialogComponent, FormsModule],
   templateUrl: './recipe-list.html',
   styleUrl: './recipe-list.css'
 })
 export class RecipeListComponent implements OnInit {
   recipes$: Observable<Recipe[]>;
+  searchTerm$ = new BehaviorSubject<string>('');
+  category$ = new BehaviorSubject<string>('Toate');
+
+  categories = ['Toate', 'Paste', 'Salate', 'Desert', 'Mic Dejun'];
+  selectedCategory = 'Toate';
+
   showDialog = false;
   selectedRecipe: Recipe | undefined;
   activeMenuId: string | null = null;
@@ -23,7 +31,26 @@ export class RecipeListComponent implements OnInit {
     private recipeService: RecipeService,
     private router: Router
   ) {
-    this.recipes$ = this.recipeService.getRecipes();
+    this.recipes$ = combineLatest([
+      this.recipeService.getRecipes(),
+      this.searchTerm$,
+      this.category$
+    ]).pipe(
+      map(([recipes, term, category]) => {
+        const lowerTerm = term.toLowerCase();
+        return recipes.filter(recipe => {
+          const matchesSearch = recipe.title.toLowerCase().includes(lowerTerm) ||
+            recipe.description.toLowerCase().includes(lowerTerm);
+          const matchesCategory = category === 'Toate' || recipe.category === category;
+          return matchesSearch && matchesCategory;
+        });
+      })
+    );
+  }
+
+  selectCategory(category: string): void {
+    this.selectedCategory = category;
+    this.category$.next(category);
   }
 
   ngOnInit(): void { }
