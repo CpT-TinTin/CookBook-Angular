@@ -1,8 +1,10 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useShoppingList } from './ShoppingListContext';
 
 function RecipeDetail() {
     const { id } = useParams();
+    const { addItems } = useShoppingList();
 
     // Mock data lookup (in a real app, fetch from API/Context)
     const recipes = {
@@ -35,13 +37,19 @@ function RecipeDetail() {
         return <div className="container"><h2>Rețeta nu a fost găsită!</h2><Link to="/">Înapoi la listă</Link></div>;
     }
 
+    const handleAddToShoppingList = () => {
+        addItems(recipe.ingredients);
+        alert('Ingrediente adăugate în lista de cumpărături!');
+    };
+
     return (
         <div className="recipe-detail-container">
             <div className="detail-header">
                 <Link to="/" className="back-link">← Înapoi</Link>
                 <div className="actions">
                     <button className="icon-btn">❤️</button>
-                    <button className="icon-btn">🖨️</button>
+                    <button className="icon-btn" onClick={handleAddToShoppingList} title="Adaugă la lista de cumpărături">🛒</button>
+                    <button className="icon-btn" onClick={() => window.print()}>🖨️</button>
                 </div>
             </div>
 

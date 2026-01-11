@@ -1,0 +1,23 @@
+<div class="container">
+    <header class="page-header">
+        <h1>🛒 Listă de Cumpărături</h1>
+        <div class="actions">
+            <button class="btn-secondary" (click)="clearList()">Golire Listă</button>
+            <button class="btn-primary" (click)="downloadText()">⬇️ Text</button>
+            <button class="btn-primary" (click)="printList()">🖨️ Print / PDF</button>
+        </div>
+    </header>
+
+    <div class="list-container" *ngIf="(items$ | async) as items">
+        <div *ngIf="items.length === 0" class="empty-state">
+            <p>Lista este goală. Adaugă ingrediente din rețete!</p>
+        </div>
+
+        <ul class="shopping-list">
+            <li *ngFor="let item of items">
+                <span class="item-name">{{ item }}</span>
+                <button class="remove-btn" (click)="removeItem(item)">&times;</button>
+            </li>
+        </ul>
+    </div>
+</div>

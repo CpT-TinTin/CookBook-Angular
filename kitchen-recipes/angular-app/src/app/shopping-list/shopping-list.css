@@ -1,0 +1,121 @@
+.container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.btn-primary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--text-light);
+    color: var(--text-color);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    transform: translateY(-2px);
+}
+
+.shopping-list {
+    list-style: none;
+    padding: 0;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.shopping-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.shopping-list li:last-child {
+    border-bottom: none;
+}
+
+.shopping-list li:hover {
+    background: var(--bg-color);
+}
+
+.item-name {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #ff7675;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.remove-btn:hover {
+    opacity: 1;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+@media print {
+
+    .actions,
+    .remove-btn,
+    header button {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .shopping-list {
+        box-shadow: none;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+}

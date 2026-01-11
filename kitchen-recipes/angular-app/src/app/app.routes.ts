@@ -7,6 +7,8 @@ import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
+import { ShoppingListComponent } from './shopping-list/shopping-list';
+
 const authGuard = () => {
     const authService = inject(AuthService);
     const router = inject(Router);
@@ -21,6 +23,7 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'recipes', component: RecipeListComponent, canActivate: [authGuard] },
     { path: 'recipes/:id', component: RecipeDetailComponent, canActivate: [authGuard] },
+    { path: 'shopping-list', component: ShoppingListComponent, canActivate: [authGuard] },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/login' }
 ];
