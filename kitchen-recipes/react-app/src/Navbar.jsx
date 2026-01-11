@@ -8,7 +8,8 @@ function Navbar() {
                 <Link to="/">🍽️ Kitchen Recipes</Link>
             </div>
             <div className="nav-links">
-                <Link to="/" className="nav-item">Rețete</Link>
+                <a href="http://localhost:4200/recipes" className="nav-item">Rețete (Angular)</a>
+                <Link to="/shopping-list" className="nav-item">Lista de Cumpărături</Link>
                 <Link to="/favorites" className="nav-item">Favorite</Link>
                 <button className="nav-btn">Logout</button>
             </div>

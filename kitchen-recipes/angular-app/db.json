@@ -1,0 +1,69 @@
+{
+    "recipes": [
+        {
+            "id": "1",
+            "title": "Paste Carbonara",
+            "description": "O rețetă clasică italiană, rapidă și delicioasă.",
+            "ingredients": [
+                "Spaghete",
+                "Ouă",
+                "Pancetta",
+                "Parmesan",
+                "Piper"
+            ],
+            "steps": [
+                "Fierbeți pastele.",
+                "Prăjiți pancetta.",
+                "Amestecați ouăle cu parmesan.",
+                "Combinați totul."
+            ],
+            "cookingTime": 20,
+            "imageUrl": "https://placehold.co/600x400?text=Carbonara",
+            "isFavorite": false,
+            "category": "Paste"
+        },
+        {
+            "id": "2",
+            "title": "Salată Caesar",
+            "description": "Salată proaspătă cu pui și crutoane.",
+            "ingredients": [
+                "Salată Romaine",
+                "Piept de pui",
+                "Crutoane",
+                "Dressing Caesar",
+                "Parmesan"
+            ],
+            "steps": [
+                "Gătiți puiul.",
+                "Tăiați salata.",
+                "Adăugați crutoanele și dressingul."
+            ],
+            "cookingTime": 15,
+            "imageUrl": "https://placehold.co/600x400?text=Caesar",
+            "isFavorite": true,
+            "category": "Salate"
+        },
+        {
+            "id": "3",
+            "title": "Tiramisu",
+            "description": "Desert elegant cu pișcoturi, cafea și mascarpone.",
+            "ingredients": [
+                "Mascarpone",
+                "Ouă",
+                "Zahăr",
+                "Cafea",
+                "Pișcoturi",
+                "Cacao"
+            ],
+            "steps": [
+                "Bateți crema.",
+                "Înmuiați pișcoturile.",
+                "Asamblați straturile."
+            ],
+            "cookingTime": 45,
+            "imageUrl": "https://placehold.co/600x400?text=Tiramisu",
+            "isFavorite": true,
+            "category": "Desert"
+        }
+    ]
+}

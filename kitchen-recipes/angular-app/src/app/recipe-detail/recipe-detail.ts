@@ -27,10 +27,14 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.recipe = this.recipeService.getRecipe(id);
-      if (!this.recipe) {
-        this.router.navigate(['/recipes']);
-      }
+      this.recipeService.getRecipe(id).subscribe({
+        next: (recipe) => {
+          this.recipe = recipe;
+        },
+        error: () => {
+          this.router.navigate(['/recipes']);
+        }
+      });
     }
   }
 
@@ -41,7 +45,10 @@ export class RecipeDetailComponent implements OnInit {
   toggleFavorite(): void {
     if (this.recipe) {
       this.recipeService.toggleFavorite(this.recipe.id);
-      this.recipe = this.recipeService.getRecipe(this.recipe.id); // Refresh local state
+      // Refresh local state
+      this.recipeService.getRecipe(this.recipe.id).subscribe(updated => {
+        this.recipe = updated;
+      });
       this.showMenu = false;
     }
   }

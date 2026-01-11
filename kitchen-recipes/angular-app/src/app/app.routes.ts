@@ -1,13 +1,10 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login';
-import { RegisterComponent } from './register/register';
-import { RecipeListComponent } from './recipe-list/recipe-list';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail';
+
 import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
-import { ShoppingListComponent } from './shopping-list/shopping-list';
+
 
 const authGuard = () => {
     const authService = inject(AuthService);
@@ -19,11 +16,29 @@ const authGuard = () => {
 };
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'recipes', component: RecipeListComponent, canActivate: [authGuard] },
-    { path: 'recipes/:id', component: RecipeDetailComponent, canActivate: [authGuard] },
-    { path: 'shopping-list', component: ShoppingListComponent, canActivate: [authGuard] },
+    {
+        path: 'login',
+        loadComponent: () => import('./login/login').then(m => m.LoginComponent)
+    },
+    {
+        path: 'register',
+        loadComponent: () => import('./register/register').then(m => m.RegisterComponent)
+    },
+    {
+        path: 'recipes',
+        loadComponent: () => import('./recipe-list/recipe-list').then(m => m.RecipeListComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'recipes/:id',
+        loadComponent: () => import('./recipe-detail/recipe-detail').then(m => m.RecipeDetailComponent),
+        canActivate: [authGuard]
+    },
+    {
+        path: 'shopping-list',
+        loadComponent: () => import('./shopping-list/shopping-list').then(m => m.ShoppingListComponent),
+        canActivate: [authGuard]
+    },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/login' }
 ];

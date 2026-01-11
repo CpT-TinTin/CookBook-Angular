@@ -2,7 +2,22 @@ import React from 'react';
 import { useShoppingList } from './ShoppingListContext';
 
 function ShoppingList() {
-    const { items, removeItem, clearList } = useShoppingList();
+    const { items, removeItem, clearList, addItems } = useShoppingList();
+
+    React.useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const itemsToAdd = params.get('addItems');
+        if (itemsToAdd) {
+            try {
+                const parsedItems = JSON.parse(itemsToAdd);
+                addItems(parsedItems);
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } catch (e) {
+                console.error('Failed to parse items', e);
+            }
+        }
+    }, [addItems]);
 
     const downloadText = () => {
         const text = "Listă de Cumpărături:\n\n" + items.map(i => `- ${i}`).join('\n');

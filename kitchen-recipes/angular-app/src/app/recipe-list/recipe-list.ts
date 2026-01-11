@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
 import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog';
 import { FormsModule } from '@angular/forms';
 
+import { ShoppingListService } from '../shopping-list.service';
+
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
@@ -29,7 +31,8 @@ export class RecipeListComponent implements OnInit {
 
   constructor(
     private recipeService: RecipeService,
-    private router: Router
+    private router: Router,
+    private shoppingListService: ShoppingListService
   ) {
     this.recipes$ = combineLatest([
       this.recipeService.getRecipes(),
@@ -89,6 +92,14 @@ export class RecipeListComponent implements OnInit {
     if (confirm('Sigur doriți să ștergeți această rețetă?')) {
       this.recipeService.deleteRecipe(id);
     }
+    this.closeMenu();
+  }
+
+  addToShoppingList(event: Event, recipe: Recipe): void {
+    event.stopPropagation();
+    // Redirect to React app with ingredients
+    const ingredientsParam = encodeURIComponent(JSON.stringify(recipe.ingredients));
+    window.location.href = `http://localhost:5173/shopping-list?addItems=${ingredientsParam}`;
     this.closeMenu();
   }
 

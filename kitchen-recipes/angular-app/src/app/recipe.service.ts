@@ -1,80 +1,59 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Recipe } from './models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  private recipes: Recipe[] = [
-    {
-      id: '1',
-      title: 'Paste Carbonara',
-      description: 'O rețetă clasică italiană, rapidă și delicioasă.',
-      ingredients: ['Spaghete', 'Ouă', 'Pancetta', 'Parmesan', 'Piper'],
-      steps: ['Fierbeți pastele.', 'Prăjiți pancetta.', 'Amestecați ouăle cu parmesan.', 'Combinați totul.'],
-      cookingTime: 20,
-      imageUrl: 'https://placehold.co/600x400?text=Carbonara',
-      isFavorite: false,
-      category: 'Paste'
-    },
-    {
-      id: '2',
-      title: 'Salată Caesar',
-      description: 'Salată proaspătă cu pui și crutoane.',
-      ingredients: ['Salată Romaine', 'Piept de pui', 'Crutoane', 'Dressing Caesar', 'Parmesan'],
-      steps: ['Gătiți puiul.', 'Tăiați salata.', 'Adăugați crutoanele și dressingul.'],
-      cookingTime: 15,
-      imageUrl: 'https://placehold.co/600x400?text=Caesar',
-      isFavorite: true,
-      category: 'Salate'
-    },
-    {
-      id: '3',
-      title: 'Tiramisu',
-      description: 'Desert elegant cu pișcoturi, cafea și mascarpone.',
-      ingredients: ['Mascarpone', 'Ouă', 'Zahăr', 'Cafea', 'Pișcoturi', 'Cacao'],
-      steps: ['Bateți crema.', 'Înmuiați pișcoturile.', 'Asamblați straturile.'],
-      cookingTime: 45,
-      imageUrl: 'https://placehold.co/600x400?text=Tiramisu',
-      isFavorite: true,
-      category: 'Desert'
-    }
-  ];
-
-  private recipesSubject = new BehaviorSubject<Recipe[]>(this.recipes);
+  private apiUrl = 'http://localhost:3000/recipes';
+  private recipesSubject = new BehaviorSubject<Recipe[]>([]);
   recipes$ = this.recipesSubject.asObservable();
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.loadRecipes();
+  }
+
+  private loadRecipes(): void {
+    this.http.get<Recipe[]>(this.apiUrl).subscribe(recipes => {
+      this.recipesSubject.next(recipes);
+    });
+  }
 
   getRecipes(): Observable<Recipe[]> {
     return this.recipes$;
   }
 
-  getRecipe(id: string): Recipe | undefined {
-    return this.recipes.find(r => r.id === id);
+  getRecipe(id: string): Observable<Recipe> {
+    return this.http.get<Recipe>(`${this.apiUrl}/${id}`);
   }
 
   addRecipe(recipe: Omit<Recipe, 'id'>): void {
     const newRecipe = { ...recipe, id: Date.now().toString() };
-    this.recipes = [...this.recipes, newRecipe];
-    this.recipesSubject.next(this.recipes);
+    this.http.post<Recipe>(this.apiUrl, newRecipe).subscribe(() => {
+      this.loadRecipes();
+    });
   }
 
   updateRecipe(updatedRecipe: Recipe): void {
-    this.recipes = this.recipes.map(r => r.id === updatedRecipe.id ? updatedRecipe : r);
-    this.recipesSubject.next(this.recipes);
+    this.http.put<Recipe>(`${this.apiUrl}/${updatedRecipe.id}`, updatedRecipe).subscribe(() => {
+      this.loadRecipes();
+    });
   }
 
   deleteRecipe(id: string): void {
-    this.recipes = this.recipes.filter(r => r.id !== id);
-    this.recipesSubject.next(this.recipes);
+    this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
+      this.loadRecipes();
+    });
   }
 
   toggleFavorite(id: string): void {
-    const recipe = this.recipes.find(r => r.id === id);
-    if (recipe) {
-      this.updateRecipe({ ...recipe, isFavorite: !recipe.isFavorite });
-    }
+    this.getRecipe(id).subscribe(recipe => {
+      if (recipe) {
+        const updatedRecipe = { ...recipe, isFavorite: !recipe.isFavorite };
+        this.updateRecipe(updatedRecipe);
+      }
+    });
   }
 }

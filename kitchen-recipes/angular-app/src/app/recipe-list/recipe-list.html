@@ -36,6 +36,7 @@
 
             <!-- Context Menu -->
             <div class="context-menu" *ngIf="activeMenuId === recipe.id" (click)="$event.stopPropagation()">
+                <button (click)="addToShoppingList($event, recipe)">🛒 Adaugă la Listă</button>
                 <button (click)="editRecipe($event, recipe)">Editează</button>
                 <button (click)="deleteRecipe($event, recipe.id)" class="delete">Șterge</button>
             </div>

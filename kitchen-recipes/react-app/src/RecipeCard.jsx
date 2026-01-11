@@ -1,8 +1,8 @@
 import React from 'react';
 
-const RecipeCard = ({ title, imageUrl }) => {
+const RecipeCard = ({ title, imageUrl, onAddToShoppingList }) => {
     const handleClick = () => {
-        alert(`Ai selectat rețeta: ${title}`);
+        // alert(`Ai selectat rețeta: ${title}`);
     };
 
     return (
@@ -15,9 +15,32 @@ const RecipeCard = ({ title, imageUrl }) => {
                 maxWidth: '300px',
                 cursor: 'pointer',
                 boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                backgroundColor: 'white'
+                backgroundColor: 'white',
+                position: 'relative'
             }}
         >
+            <button
+                onClick={onAddToShoppingList}
+                title="Adaugă la lista de cumpărături"
+                style={{
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px',
+                    background: 'white',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '32px',
+                    height: '32px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                    cursor: 'pointer',
+                    zIndex: 10
+                }}
+            >
+                🛒
+            </button>
             <img
                 src={imageUrl}
                 alt={title}

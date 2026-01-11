@@ -1,41 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCard from './RecipeCard';
+import { recipes as initialRecipes } from './data';
+import { useShoppingList } from './ShoppingListContext';
+import AddRecipeModal from './AddRecipeModal';
 
 function RecipeList() {
     const [selectedCategory, setSelectedCategory] = useState('Toate');
     const [searchTerm, setSearchTerm] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const categories = ['Toate', 'Paste', 'Salate', 'Desert', 'Mic Dejun'];
+    const { addItems } = useShoppingList();
 
-    const [recipes, setRecipes] = useState([
-        {
-            id: 1,
-            title: 'Paste Carbonara',
-            description: 'O rețetă clasică italiană cu ouă, brânză, pancetta și piper.',
-            cookingTime: 20,
-            imageUrl: 'https://placehold.co/600x400?text=Carbonara',
-            isFavorite: true,
-            category: 'Paste'
-        },
-        {
-            id: 2,
-            title: 'Salată Caesar',
-            description: 'Salată proaspătă cu crutoane, parmezan și sos special.',
-            cookingTime: 15,
-            imageUrl: 'https://placehold.co/600x400?text=Caesar',
-            isFavorite: false,
-            category: 'Salate'
-        },
-        {
-            id: 3,
-            title: 'Tiramisu',
-            description: 'Desert elegant cu pișcoturi, cafea și mascarpone.',
-            cookingTime: 45,
-            imageUrl: 'https://placehold.co/600x400?text=Tiramisu',
-            isFavorite: true,
-            category: 'Desert'
-        }
-    ]);
+    const [recipes, setRecipes] = useState(initialRecipes);
 
     const filteredRecipes = recipes.filter(recipe => {
         const matchesCategory = selectedCategory === 'Toate' || recipe.category === selectedCategory;
@@ -43,6 +20,12 @@ function RecipeList() {
             recipe.description.toLowerCase().includes(searchTerm.toLowerCase());
         return matchesCategory && matchesSearch;
     });
+
+    const handleAddRecipe = (newRecipe) => {
+        const recipeWithId = { ...newRecipe, id: Date.now(), isFavorite: false };
+        setRecipes([...recipes, recipeWithId]);
+        setIsModalOpen(false);
+    };
 
     return (
         <div className="container">
@@ -69,7 +52,7 @@ function RecipeList() {
                         />
                     </div>
                 </div>
-                <button className="add-btn">+ Adaugă Rețetă</button>
+                <button className="add-btn" onClick={() => setIsModalOpen(true)}>+ Adaugă Rețetă</button>
             </header>
 
             <div className="categories-wrapper" style={{ marginBottom: '2rem', overflowX: 'auto' }}>
@@ -104,10 +87,22 @@ function RecipeList() {
                             description={recipe.description}
                             cookingTime={recipe.cookingTime}
                             isFavorite={recipe.isFavorite}
+                            onAddToShoppingList={(e) => {
+                                e.preventDefault();
+                                addItems(recipe.ingredients);
+                                alert('Ingrediente adăugate în lista de cumpărături!');
+                            }}
                         />
                     </Link>
                 ))}
             </div>
+
+            {isModalOpen && (
+                <AddRecipeModal
+                    onClose={() => setIsModalOpen(false)}
+                    onSave={handleAddRecipe}
+                />
+            )}
         </div>
     );
 }
