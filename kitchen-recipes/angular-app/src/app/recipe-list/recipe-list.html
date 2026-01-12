@@ -10,6 +10,10 @@
         <button class="add-btn" (click)="addRecipe()">+ Adaugă Rețetă</button>
     </header>
 
+    <div *ngIf="isLoading" class="loading-spinner" style="text-align: center; padding: 2rem;">
+        Se încarcă rețetele...
+    </div>
+
     <div class="categories-wrapper">
         <div class="categories">
             <button *ngFor="let cat of categories" class="category-chip" [class.active]="selectedCategory === cat"

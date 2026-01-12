@@ -29,6 +29,8 @@ export class RecipeListComponent implements OnInit {
   selectedRecipe: Recipe | undefined;
   activeMenuId: string | null = null;
 
+  isLoading = true;
+
   constructor(
     private recipeService: RecipeService,
     private router: Router,
@@ -40,6 +42,7 @@ export class RecipeListComponent implements OnInit {
       this.category$
     ]).pipe(
       map(([recipes, term, category]) => {
+        this.isLoading = false;
         const lowerTerm = term.toLowerCase();
         return recipes.filter(recipe => {
           const matchesSearch = recipe.title.toLowerCase().includes(lowerTerm) ||

@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../models';
-
 import { ShoppingListService } from '../shopping-list.service';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -21,7 +21,8 @@ export class RecipeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private recipeService: RecipeService,
-    private shoppingListService: ShoppingListService
+    private shoppingListService: ShoppingListService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -56,13 +57,13 @@ export class RecipeDetailComponent implements OnInit {
   addToShoppingList(): void {
     if (this.recipe) {
       this.shoppingListService.addItems(this.recipe.ingredients);
-      alert('Ingrediente adăugate în lista de cumpărături!');
+      this.toastService.show('Ingrediente adăugate în lista de cumpărături!', 'success');
       this.showMenu = false;
     }
   }
 
   printRecipe(): void {
-    alert('Se pregătește imprimarea pentru: ' + this.recipe?.title);
+    this.toastService.show('Se pregătește imprimarea pentru: ' + this.recipe?.title, 'info');
     this.showMenu = false;
   }
 

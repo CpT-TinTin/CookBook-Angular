@@ -2,10 +2,12 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useShoppingList } from './ShoppingListContext';
 import { recipes as allRecipes } from './data';
+import { useToast } from './ToastContext';
 
 function RecipeDetail() {
     const { id } = useParams();
     const { addItems } = useShoppingList();
+    const { showToast } = useToast();
 
     // Find recipe by ID
     const recipe = allRecipes.find(r => r.id === parseInt(id));
@@ -16,7 +18,7 @@ function RecipeDetail() {
 
     const handleAddToShoppingList = () => {
         addItems(recipe.ingredients);
-        alert('Ingrediente adăugate în lista de cumpărături!');
+        showToast('Ingrediente adăugate în lista de cumpărături!', 'success');
     };
 
     return (
