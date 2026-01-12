@@ -1,4 +1,15 @@
-<div class="detail-container" *ngIf="recipe">
+<div class="loading-state" *ngIf="isLoading"
+    style="text-align: center; padding: 4rem; font-size: 1.5rem; color: #636e72;">
+    ⏳ Se încarcă detaliile rețetei...
+</div>
+
+<div class="error-state" *ngIf="error" style="text-align: center; padding: 4rem; color: #d63031;">
+    <h2>😢 {{ error }}</h2>
+    <button (click)="goBack()" style="padding: 0.8rem 1.5rem; margin-top: 1rem; cursor: pointer;">Înapoi la
+        listă</button>
+</div>
+
+<div class="detail-container" *ngIf="recipe && !isLoading">
     <div class="header-actions">
         <button class="back-btn" (click)="goBack()">← Înapoi</button>
 
@@ -9,6 +20,7 @@
                     {{ recipe.isFavorite ? '💔 Elimină de la Favorite' : '❤️ Adaugă la Favorite' }}
                 </button>
                 <button (click)="addToShoppingList()">🛒 Adaugă la Listă</button>
+                <button (click)="openMealPlanModal()">📅 Adaugă în Planificator</button>
                 <button (click)="printRecipe()">🖨 Imprimă</button>
             </div>
         </div>
@@ -39,6 +51,108 @@
             <ol>
                 <li *ngFor="let step of recipe.steps">{{ step }}</li>
             </ol>
+        </div>
+    </div>
+
+    <!-- Nutrition Section -->
+    <div class="nutrition-section" *ngIf="nutritionData">
+        <h2>Valori Nutriționale (Estimat / porție)</h2>
+        <div class="nutrition-card">
+            <div class="chart-container">
+                <div class="pie-chart"
+                    [style.background]="'conic-gradient(#ff6b6b 0% 35%, #54a0ff 35% 65%, #ffd32a 65% 100%)'"></div>
+                <div class="total-cals">
+                    <strong>{{ nutritionData.calories | number:'1.0-0' }}</strong>
+                    <span>kcal</span>
+                </div>
+            </div>
+            <div class="nutrition-legend">
+                <div class="legend-item">
+                    <span class="dot" style="background: #ff6b6b"></span>
+                    <span class="label">Proteine</span>
+                    <span class="value">{{ nutritionData.protein }}g</span>
+                </div>
+                <div class="legend-item">
+                    <span class="dot" style="background: #54a0ff"></span>
+                    <span class="label">Carbohidrați</span>
+                    <span class="value">{{ nutritionData.carbs }}g</span>
+                </div>
+                <div class="legend-item">
+                    <span class="dot" style="background: #ffd32a"></span>
+                    <span class="label">Grăsimi</span>
+                    <span class="value">{{ nutritionData.fat }}g</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="reviews-section">
+        <h2>Recenzii și Rating</h2>
+
+        <div class="rating-summary">
+            <div class="average-rating">
+                <span class="star">★</span>
+                <span class="score">{{ averageRating | number:'1.1-1' }}</span>
+                <span class="count">({{ recipe.ratings?.length || 0 }} voturi)</span>
+            </div>
+        </div>
+
+        <div class="add-review">
+            <h3>Adaugă o recenzie</h3>
+            <div class="rating-input">
+                <label>Nota ta:</label>
+                <select [(ngModel)]="newReviewRating">
+                    <option [value]="5">5 ★★★★★</option>
+                    <option [value]="4">4 ★★★★</option>
+                    <option [value]="3">3 ★★★</option>
+                    <option [value]="2">2 ★★</option>
+                    <option [value]="1">1 ★</option>
+                </select>
+            </div>
+            <textarea [(ngModel)]="newReviewText" placeholder="Spune-ne părerea ta despre această rețetă..."
+                rows="3"></textarea>
+            <button class="submit-btn" (click)="submitReview()" [disabled]="!newReviewText.trim()">Postează
+                Recenzia</button>
+        </div>
+
+        <div class="comments-list">
+            <div class="comment" *ngFor="let comment of recipe.comments">
+                <div class="comment-header">
+                    <strong>{{ comment.user }}</strong>
+                    <span class="comment-date">{{ comment.date | date:'shortDate' }}</span>
+                    <span class="comment-stars">{{ '★'.repeat(comment.rating) }}</span>
+                </div>
+                <p>{{ comment.text }}</p>
+            </div>
+            <p *ngIf="!recipe.comments?.length" class="no-reviews">Fii primul care lasă o recenzie!</p>
+        </div>
+    </div>
+
+    <!-- Meal Plan Modal -->
+    <div class="modal-overlay" *ngIf="showMealPlanModal" (click)="closeMealPlanModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <h3>Adaugă în Planificator</h3>
+            <p>Alege ziua și momentul zilei pentru <strong>{{ recipe?.title }}</strong></p>
+
+            <div class="form-group">
+                <label>Ziua:</label>
+                <select [(ngModel)]="selectedDay">
+                    <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Masa:</label>
+                <select [(ngModel)]="selectedType">
+                    <option *ngFor="let type of mealTypes" [value]="type">{{ type }}</option>
+                </select>
+            </div>
+
+            <div class="modal-actions">
+                <button class="cancel-btn" (click)="closeMealPlanModal()">Anulează</button>
+                <button class="confirm-btn" (click)="addToMealPlan()">Salvează</button>
+            </div>
         </div>
     </div>
 </div>

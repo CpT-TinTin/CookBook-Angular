@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Recipe } from './models';
+import { Recipe, Comment } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +55,29 @@ export class RecipeService {
         this.updateRecipe(updatedRecipe);
       }
     });
+  }
+
+  addReview(recipeId: string, comment: Comment): void {
+    this.getRecipe(recipeId).subscribe(recipe => {
+      if (recipe) {
+        const updatedRecipe = {
+          ...recipe,
+          comments: [...(recipe.comments || []), comment],
+          ratings: [...(recipe.ratings || []), comment.rating]
+        };
+        this.updateRecipe(updatedRecipe);
+      }
+    });
+  }
+
+  getNutrition(ingredients: string[]): Observable<{ calories: number, protein: number, carbs: number, fat: number }> {
+    // Mock implementation based on ingredient count
+    const multiplier = ingredients.length;
+    return new BehaviorSubject({
+      calories: 250 + (multiplier * 50),
+      protein: 10 + (multiplier * 2),
+      carbs: 20 + (multiplier * 4),
+      fat: 5 + (multiplier * 1.5)
+    }).asObservable();
   }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../models';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { RecipeDialogComponent } from '../recipe-dialog/recipe-dialog';
 import { FormsModule } from '@angular/forms';
 
@@ -13,7 +13,7 @@ import { ShoppingListService } from '../shopping-list.service';
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [CommonModule, RecipeDialogComponent, FormsModule],
+  imports: [CommonModule, RecipeDialogComponent, FormsModule, RouterModule],
   templateUrl: './recipe-list.html',
   styleUrl: './recipe-list.css'
 })
@@ -41,8 +41,11 @@ export class RecipeListComponent implements OnInit {
       this.searchTerm$,
       this.category$
     ]).pipe(
+      tap(() => {
+        // Fix NG0100: Update loading state in next tick
+        setTimeout(() => this.isLoading = false, 0);
+      }),
       map(([recipes, term, category]) => {
-        this.isLoading = false;
         const lowerTerm = term.toLowerCase();
         return recipes.filter(recipe => {
           const matchesSearch = recipe.title.toLowerCase().includes(lowerTerm) ||
@@ -62,7 +65,13 @@ export class RecipeListComponent implements OnInit {
   ngOnInit(): void { }
 
   viewDetails(id: string): void {
-    this.router.navigate(['/recipes', id]);
+    console.log('Navigating to recipe:', id);
+    // alert('Click detected for ID: ' + id); // Temporary debug
+    this.router.navigate(['/recipes', id]).then(success => {
+      if (!success) {
+        console.error('Navigation failed');
+      }
+    });
   }
 
   toggleMenu(event: Event, id: string): void {

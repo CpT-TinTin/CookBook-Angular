@@ -225,3 +225,339 @@ h1 {
     font-weight: 600;
     font-size: 0.9rem;
 }
+/* Reviews Section */
+.reviews-section {
+    padding: 0 3rem 4rem 3rem;
+    border-top: 1px solid #dfe6e9;
+    margin-top: 2rem;
+    padding-top: 3rem;
+}
+
+.rating-summary {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: #fff0f3;
+    padding: 1.5rem;
+    border-radius: 16px;
+    width: fit-content;
+}
+
+.average-rating {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.average-rating .star {
+    color: #ffd700;
+    font-size: 2.5rem;
+}
+
+.average-rating .score {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #2d3436;
+}
+
+.average-rating .count {
+    color: #636e72;
+    font-size: 1.1rem;
+}
+
+.add-review {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 3rem;
+}
+
+.add-review h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #2d3436;
+}
+
+.rating-input {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.rating-input select {
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #dfe6e9;
+    font-size: 1rem;
+    min-width: 150px;
+}
+
+.add-review textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #dfe6e9;
+    font-family: inherit;
+    resize: vertical;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.add-review textarea:focus {
+    outline: none;
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.submit-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #ee5253;
+}
+
+.submit-btn:disabled {
+    background: #b2bec3;
+    cursor: not-allowed;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.comment {
+    border-bottom: 1px solid #f1f2f6;
+    padding-bottom: 1.5rem;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.comment-date {
+    color: #b2bec3;
+    font-size: 0.9rem;
+}
+
+.comment-stars {
+    color: #ffd700;
+}
+
+.no-reviews {
+    text-align: center;
+    color: #636e72;
+    padding: 2rem;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .reviews-section {
+        padding: 0 1.5rem 2rem 1.5rem;
+    }
+}
+
+/* Meal Plan Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #2d3436;
+    margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+    color: #636e72;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2d3436;
+    font-weight: 600;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 12px;
+    border: 1px solid #dfe6e9;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.cancel-btn {
+    background: none;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    color: #636e72;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.confirm-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.confirm-btn:hover {
+    background: #ee5253;
+    transform: translateY(-2px);
+}
+
+/* Nutrition Section */
+.nutrition-section {
+    padding: 0 3rem 2rem 3rem;
+    margin-bottom: 2rem;
+}
+
+.nutrition-card {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 600px;
+}
+
+.chart-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.pie-chart {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* Background set inline for dynamic values if needed, or static here */
+}
+
+.total-cals {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.total-cals strong {
+    font-size: 1.5rem;
+    color: #2d3436;
+    line-height: 1;
+}
+
+.total-cals span {
+    font-size: 0.8rem;
+    color: #636e72;
+}
+
+.nutrition-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed #dfe6e9;
+}
+
+.legend-item:last-child {
+    border-bottom: none;
+}
+
+.legend-item .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.legend-item .label {
+    flex: 1;
+    color: #636e72;
+    font-weight: 500;
+}
+
+.legend-item .value {
+    color: #2d3436;
+    font-weight: 700;
+}

@@ -1,0 +1,24 @@
+<div class="planner-container">
+    <h1>📅 Planificator Săptămânal</h1>
+    <p class="subtitle">Organizează-ți mesele pentru o săptămână sănătoasă și delicioasă.</p>
+
+    <div class="planner-grid">
+        <div class="header-row">
+            <div class="corner-cell"></div>
+            <div class="day-header" *ngFor="let day of days">{{ day }}</div>
+        </div>
+
+        <div class="meal-row" *ngFor="let type of mealTypes">
+            <div class="type-header">{{ type }}</div>
+            <div class="meal-cell" *ngFor="let day of days">
+                <div class="meal-slot" *ngIf="plan[day] && plan[day][type]" (click)="goToRecipe(plan[day][type].id)">
+                    <span class="meal-title">{{ plan[day][type].title }}</span>
+                    <button class="remove-btn" (click)="$event.stopPropagation(); removeMeal(day, type)">×</button>
+                </div>
+                <div class="empty-slot" *ngIf="!plan[day] || !plan[day][type]">
+                    <span>+</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

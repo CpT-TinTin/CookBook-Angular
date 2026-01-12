@@ -24,7 +24,8 @@
     </div>
 
     <div class="recipe-grid">
-        <div *ngFor="let recipe of recipes$ | async" class="recipe-card" (click)="viewDetails(recipe.id)">
+        <div *ngFor="let recipe of recipes$ | async" class="recipe-card" (click)="viewDetails(recipe.id)"
+            style="cursor: pointer; position: relative; z-index: 1;">
             <img [src]="recipe.imageUrl" [alt]="recipe.title" class="recipe-image">
             <div class="recipe-content">
                 <h3>{{ recipe.title }}</h3>

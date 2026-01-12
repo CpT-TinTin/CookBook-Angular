@@ -64,6 +64,82 @@
             "imageUrl": "https://placehold.co/600x400?text=Tiramisu",
             "isFavorite": true,
             "category": "Desert"
+        },
+        {
+            "id": "4",
+            "title": "Burger Clasic American",
+            "description": "Un burger suculent cu vită, cheddar și sos special.",
+            "ingredients": [
+                "Carne tocată vită",
+                "Chiflă burger",
+                "Brânză Cheddar",
+                "Salată verde",
+                "Roșii",
+                "Ceapă roșie",
+                "Sos Burger"
+            ],
+            "steps": [
+                "Formați chiftelele de carne.",
+                "Prăjiți carnea pe grill.",
+                "Topiți brânza pe carne.",
+                "Asamblați burgerul cu legume și sos."
+            ],
+            "cookingTime": 25,
+            "imageUrl": "https://placehold.co/600x400?text=Burger",
+            "isFavorite": false,
+            "category": "Principal",
+            "ratings": [],
+            "comments": []
+        },
+        {
+            "id": "5",
+            "title": "Supă Cremă de Roșii",
+            "description": "O supă caldă și reconfortantă, perfectă cu crutoane.",
+            "ingredients": [
+                "Roșii proaspete",
+                "Ceapă",
+                "Usturoi",
+                "Busuioc",
+                "Smântână de gătit",
+                "Ulei de măsline"
+            ],
+            "steps": [
+                "Căliți ceapa și usturoiul.",
+                "Adăugați roșiile tăiate.",
+                "Fierbeți 20 minute.",
+                "Blenduiți totul și adăugați smântâna."
+            ],
+            "cookingTime": 35,
+            "imageUrl": "https://placehold.co/600x400?text=Supa+Rosii",
+            "isFavorite": false,
+            "category": "Supe",
+            "ratings": [],
+            "comments": []
+        },
+        {
+            "id": "6",
+            "title": "Cheesecake cu Fructe",
+            "description": "Desert fin cu brânză și topping de fructe de pădure.",
+            "ingredients": [
+                "Biscuiți digestivi",
+                "Unt",
+                "Cremă de brânză",
+                "Ouă",
+                "Zahăr",
+                "Fructe de pădure"
+            ],
+            "steps": [
+                "Mărunțiți biscuiții și amestecați cu untul.",
+                "Preparați crema de brânză.",
+                "Coaceți blatul și crema.",
+                "Decorați cu fructe."
+            ],
+            "cookingTime": 60,
+            "imageUrl": "https://placehold.co/600x400?text=Cheesecake",
+            "isFavorite": true,
+            "category": "Desert",
+            "ratings": [],
+            "comments": []
         }
     ],
     "shoppingList": []

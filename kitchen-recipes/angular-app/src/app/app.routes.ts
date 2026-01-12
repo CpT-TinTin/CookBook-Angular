@@ -39,6 +39,11 @@ export const routes: Routes = [
         loadComponent: () => import('./shopping-list/shopping-list').then(m => m.ShoppingListComponent),
         canActivate: [authGuard]
     },
+    {
+        path: 'meal-planner',
+        loadComponent: () => import('./meal-planner/meal-planner.component').then(m => m.MealPlannerComponent),
+        canActivate: [authGuard]
+    },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/login' }
 ];
